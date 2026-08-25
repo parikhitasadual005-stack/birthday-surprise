@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 A Special Birthday</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #12001f;
+    color: white;
+}
+
+/* ================= PAGE SYSTEM ================= */
+
+.page {
+    position: absolute;
+    inset: 0;
+    min-height: 100vh;
+    padding: 25px 20px 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: 0.7s ease;
+    overflow-y: auto;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.page.prev {
+    transform: translateX(-100%);
+}
+
+/* ================= BACKGROUNDS ================= */
+
+#page1 {
+    background: radial-gradient(circle at top, #ff4f81, #6a1b9a 55%, #160021);
+}
+
+#page2 {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+#page3 {
+    background: linear-gradient(135deg, #141e30, #243b55);
+}
+
+#page4 {
+    background: linear-gradient(135deg, #41295a, #2F0743);
+}
+
+#page5 {
+    background: linear-gradient(135deg, #00b09b, #096b5c);
+}
+
+#page6 {
+    background: radial-gradient(circle, #ff416c, #7b1fa2 60%, #160021);
+}
+
+/* ================= TEXT ================= */
+
+h1 {
+    font-family: "Pacifico", cursive;
+    font-size: clamp(40px, 12vw, 80px);
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: clamp(30px, 8vw, 50px);
+    margin-bottom: 20px;
+}
+
+p {
+    max-width: 650px;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.yellow {
+    color: #ffe66d;
+}
+
+.pink {
+    color: #ffb6c1;
+}
+
+/* ================= BUTTON ================= */
+
+.btn {
+    margin-top: 30px;
+    padding: 15px 28px;
+    border: none;
+    border-radius: 50px;
+    background: #ffe66d;
+    color: #5b136e;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,.3);
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: scale(1.08);
+}
+
+.btn:active {
+    transform: scale(.95);
+}
+
+/* ================= BALLOONS ================= */
+
+.balloon {
+    position: fixed;
+    bottom: -120px;
+    width: 45px;
+    height: 58px;
+    border-radius: 50%;
+    z-index: 1;
+    animation: balloonFloat 9s linear infinite;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 90px;
+    background: rgba(255,255,255,.7);
+    left: 50%;
+    top: 55px;
+}
+
+.b1 { left: 5%; background: #ff4757; }
+.b2 { left: 23%; background: #1e90ff; animation-delay: 2s; }
+.b3 { left: 50%; background: #2ed573; animation-delay: 4s; }
+.b4 { left: 75%; background: #ffa502; animation-delay: 1s; }
+.b5 { left: 90%; background: #e056fd; animation-delay: 3s; }
+
+@keyframes balloonFloat {
+    from {
+        transform: translateY(0) rotate(0);
+    }
+    to {
+        transform: translateY(-120vh) rotate(360deg);
+    }
+}
+
+/* ================= PAGE 1 ================= */
+
+.big-heart {
+    font-size: 90px;
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ================= PAGE 2 CAKE ================= */
+
+.cake {
+    position: relative;
+    width: 210px;
+    height: 180px;
+    margin: 20px 0;
+}
+
+.cake-body {
+    position: absolute;
+    bottom: 0;
+    width: 210px;
+    height: 100px;
+    background: #ff9fb2;
+    border-radius: 15px 15px 25px 25px;
+    box-shadow: inset 0 -15px #ff6f91;
+}
+
+.cream {
+    position: absolute;
+    top: 65px;
+    width: 210px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.candle {
+    position: absolute;
+    top: 5px;
+    left: 97px;
+    width: 18px;
+    height: 65px;
+    background: #ffe66d;
+    border-radius: 5px;
+}
+
+.flame {
+    position: absolute;
+    top: -27px;
+    left: 2px;
+    width: 15px;
+    height: 24px;
+    background: orange;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    animation: flicker .4s infinite alternate;
+}
+
+@keyframes flicker {
+    from { transform: rotate(-45deg) scale(1); }
+    to { transform: rotate(-45deg) scale(1.25); }
+}
+
+/* ================= PAGE 3 PHOTOS ================= */
+
+.gallery {
+    width: 100%;
+    max-width: 700px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.photo {
+    height: 180px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,.3);
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ================= PAGE 4 MESSAGE ================= */
+
+.message-box {
+    max-width: 700px;
+    padding: 30px 25px;
+    border-radius: 25px;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(10px);
+}
+
+/* ================= PAGE 5 WISHES ================= */
+
+.wishes {
+    width: 100%;
+    max-width: 700px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.wish {
+    padding: 25px 10px;
+    background: rgba(255,255,255,.15);
+    border-radius: 20px;
+    transition: .3s;
+}
+
+.wish:hover {
+    transform: translateY(-8px);
+}
+
+.wish span {
+    display: block;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* ================= PAGE 6 GIFT ================= */
+
+.gift {
+    position: relative;
+    width: 150px;
+    height: 130px;
+    margin: 40px auto;
+    cursor: pointer;
+    animation: giftBounce 1.5s infinite;
+}
+
+.gift-body {
+    position: absolute;
+    bottom: 0;
+    width: 150px;
+    height: 100px;
+    background: #ff4757;
+    border-radius: 5px;
+}
+
+.gift-lid {
+    position: absolute;
+    top: 15px;
+    left: -8px;
+    width: 166px;
+    height: 30px;
+    background: #ff6b81;
+    border-radius: 5px;
+}
+
+.ribbon-v {
+    position: absolute;
+    left: 65px;
+    bottom: 0;
+    width: 20px;
+    height: 115px;
+    background: #ffe66d;
+}
+
+.ribbon-h {
+    position: absolute;
+    top: 15px;
+    left: -8px;
+    width: 166px;
+    height: 15px;
+    background: #ffe66d;
+}
+
+@keyframes giftBounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.final-message {
+    display: none;
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ================= NAVIGATION ================= */
+
+.navigation {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 10px;
+}
+
+.nav-btn {
+    border: none;
+    border-radius: 50px;
+    padding: 10px 18px;
+    background: rgba(255,255,255,.9);
+    color: #6a1b9a;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.page-number {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: rgba(0,0,0,.25);
+}
+
+/* ================= CONFETTI ================= */
+
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 9px;
+    height: 14px;
+    z-index: 50;
+    animation: confettiFall 4s linear forwards;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width: 500px) {
+
+    .page {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+
+    .gallery,
+    .wishes {
+        gap: 10px;
+    }
+
+    .photo {
+        height: 145px;
+    }
+
+    .wish {
+        padding: 18px 8px;
+    }
+
+    .wish span {
+        font-size: 32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating balloons -->
+<div class="balloon b1"></div>
+<div class="balloon b2"></div>
+<div class="balloon b3"></div>
+<div class="balloon b4"></div>
+<div class="balloon b5"></div>
+
+<div class="page-number">
+    <span id="pageNumber">1</span> / 6
+</div>
+
+<!-- ================= PAGE 1 ================= -->
+
+<section class="page active" id="page1">
+
+    <div class="big-heart">❤️</div>
+
+    <h1>
+        Hey <span class="yellow">Birthday QUEEN!</span>
+    </h1>
+
+    <p>
+        Someone from your friend list has prepared something very special for you...
+        ✨
+        <br>
+        Are you ready?
+    </p>
+
+    <button class="btn" onclick="nextPage()">
+        💖 Start the Surprise
+    </button>
+
+</section>
+
+
+<!-- ================= PAGE 2 ================= -->
+
+<section class="page" id="page2">
+
+    <h2>🎉 Happy Birthday PRIYANKA! 🎉</h2>
+
+    <p>
+        Today is your day, so make it unforgettable!
+    </p>
+
+    <div class="cake">
+
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+
+        <div class="cream"></div>
+
+        <div class="cake-body"></div>
+
+    </div>
+
+    <p>
+        🥳 May your birthday be full of happiness,
+        laughter and wonderful moments!
+    </p>
+
+    <button class="btn" onclick="nextPage()">
+        📸 See The Memories
+    </button>
+
+</section>
+
+
+<!-- ================= PAGE 3 ================= -->
+
+<section class="page" id="page3">
+
+    <h2>📸 Beautiful Memories</h2>
+
+    <p>
+        SOME BEAUTIFUL MEMORIES OF HER (PRIYANKA) !
+    </p>
+
+    <div class="gallery">
+
+        <!-- Replace photo1.jpg etc. with your images -->
+
+        <div class="photo">
+            <img src="./Images/WhatsApp Image 2026-08-25 at 15.13.02.jpeg"
+                 onerror="this.style.display='none'; this.parentElement.innerHTML='📷 Photo 1'">
+        </div>
+
+        <div class="photo">
+            <img src="./Images/WhatsApp Image 2026-08-25 at 15.13.03 (1).jpeg"
+                 onerror="this.style.display='none'; this.parentElement.innerHTML='📷 Photo 2'">
+        </div>
+
+        <div class="photo">
+            <img src="./Images/WhatsApp Image 2026-08-25 at 15.13.03 (2).jpeg"
+                 onerror="this.style.display='none'; this.parentElement.innerHTML='📷 Photo 3'">
+        </div>
+
+        <div class="photo">
+            <img src="./Images/WhatsApp Image 2026-08-25 at 15.13.03.jpeg"
+                 onerror="this.style.display='none'; this.parentElement.innerHTML='📷 Photo 4'">
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="nextPage()">
+        💌 Read The Message
+    </button>
+
+</section>
+
+
+<!-- ================= PAGE 4 ================= -->
+
+<section class="page" id="page4">
+
+    <h2>💌 A Special Message</h2>
+
+    <div class="message-box">
+
+        <p id="typingText"></p>
+
+    </div>
+
+    <button class="btn" onclick="nextPage()">
+        ✨ Birthday Wishes
+    </button>
+
+</section>
+
+
+<!-- ================= PAGE 5 ================= -->
+
+<section class="page" id="page5">
+
+    <h2>✨ My Wishes For You</h2>
+
+    <div class="wishes">
+
+        <div class="wish">
+            <span>❤️</span>
+            Happiness
+        </div>
+
+        <div class="wish">
+            <span>🌟</span>
+            Success
+        </div>
+
+        <div class="wish">
+            <span>😊</span>
+            Endless Smiles
+        </div>
+
+        <div class="wish">
+            <span>🌈</span>
+            Beautiful Moments
+        </div>
+
+        <div class="wish">
+            <span>💰</span>
+            Prosperity
+        </div>
+
+        <div class="wish">
+            <span>✨</span>
+            Dreams Come True
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="nextPage()">
+        🎁 One Last Surprise
+    </button>
+
+</section>
+
+
+<!-- ================= PAGE 6 ================= -->
+
+<section class="page" id="page6">
+
+    <h2>🎁 One Last Surprise...</h2>
+
+    <p>
+        There is one more gift waiting for you.
+        <br>
+        Tap the gift! 👇
+    </p>
+
+    <div class="gift" onclick="openGift()">
+
+        <div class="gift-body"></div>
+
+        <div class="gift-lid"></div>
+
+        <div class="ribbon-v"></div>
+
+        <div class="ribbon-h"></div>
+
+    </div>
+
+    <div class="final-message" id="finalMessage">
+
+        <h2>🎉 HAPPY BIRTHDAY PRIYANKA! 🎉</h2>
+
+        <p>
+            <center>May this new chapter of your life be filled with
+            love, laughter, success and countless beautiful memories.</center>
+            ❤️
+            <br><br>
+            Never stop smiling.
+            Never stop dreaming.
+            Never stop being amazing.
+            ✨
+            <br><br>
+            🎂 Have the most wonderful birthday ever! 🎂
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- Navigation -->
+
+<div class="navigation">
+
+    <button class="nav-btn" onclick="previousPage()">
+        ←
+    </button>
+
+    <button class="nav-btn" onclick="nextPage()">
+        →
+    </button>
+
+</div>
+
+
+<script>
+
+let currentPage = 1;
+const totalPages = 6;
+
+function showPage(number) {
+
+    document.querySelectorAll(".page").forEach((page, index) => {
+
+        page.classList.remove("active", "prev");
+
+        if (index + 1 === number) {
+            page.classList.add("active");
+        }
+
+        if (index + 1 < number) {
+            page.classList.add("prev");
+        }
+
+    });
+
+    document.getElementById("pageNumber").textContent = number;
+
+    if (number === 4) {
+        startTyping();
+    }
+
+    if (number === 6) {
+        createConfetti();
+    }
+}
+
+function nextPage() {
+
+    if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+    }
+
+}
+
+function previousPage() {
+
+    if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+    }
+
+}
+
+
+/* ================= TYPING MESSAGE ================= */
+
+let typingStarted = false;
+
+function startTyping() {
+
+    if (typingStarted) return;
+
+    typingStarted = true;
+
+    const message =
+        "On this beautiful day, I just want to wish you a very Happy Birthday! 🎂 " +
+        "May every moment of your life be filled with happiness, love and success. " +
+        "May you always have reasons to smile and people around you who truly care about you. " +
+        "Keep chasing your dreams, keep shining and always remember how special you are. ❤️";
+
+    let i = 0;
+
+    const element = document.getElementById("typingText");
+
+    function type() {
+
+        if (i < message.length) {
+
+            element.textContent += message.charAt(i);
+
+            i++;
+
+            setTimeout(type, 35);
+
+        }
+
+    }
+
+    type();
+}
+
+
+/* ================= GIFT ================= */
+
+function openGift() {
+
+    document.querySelector(".gift").style.display = "none";
+
+    document.querySelector("#page6 > p").style.display = "none";
+
+    document.getElementById("finalMessage").style.display = "block";
+
+    createConfetti();
+
+}
+
+
+/* ================= CONFETTI ================= */
+
+function createConfetti() {
+
+    const colors = [
+        "#ff4757",
+        "#ffe66d",
+        "#2ed573",
+        "#1e90ff",
+        "#e056fd",
+        "#ffffff"
+    ];
+
+    for (let i = 0; i < 100; i++) {
+
+        const confetti = document.createElement("div");
+
+        confetti.className = "confetti";
+
+        confetti.style.left =
+            Math.random() * 100 + "vw";
+
+        confetti.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        confetti.style.animationDelay =
+            Math.random() * 2 + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 6000);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
